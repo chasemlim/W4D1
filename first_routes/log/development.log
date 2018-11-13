@@ -1228,3 +1228,494 @@ Processing by ArtworksController#index as */*
 Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:03:58 -0800
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (1.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 75ms (Views: 19.4ms | ActiveRecord: 17.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-11-12 17:04:04 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4
+Completed 200 OK in 39ms (Views: 8.0ms | ActiveRecord: 6.9ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-11-12 17:04:12 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17
+Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-11-12 17:04:49 -0800
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Liz"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Liz"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Liz"], ["created_at", "2018-11-13 01:04:49.204258"], ["updated_at", "2018-11-13 01:04:49.204258"]]
+  ↳ app/controllers/users_controller.rb:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:9
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 3.5ms)
+
+
+Started PATCH "/users/5" for 127.0.0.1 at 2018-11-12 17:05:12 -0800
+Processing by UsersController#update as */*
+  Parameters: {"user"=>{"username"=>"Liz$"}, "id"=>"5"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:29
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "Liz$"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:29
+  [1m[36mUser Update (0.8ms)[0m  [1m[33mUPDATE "users" SET "username" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["username", "Liz$"], ["updated_at", "2018-11-13 01:05:12.073236"], ["id", 5]]
+  ↳ app/controllers/users_controller.rb:29
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:29
+Completed 200 OK in 13ms (Views: 1.6ms | ActiveRecord: 3.5ms)
+
+
+Started DELETE "/users/5" for 127.0.0.1 at 2018-11-12 17:05:22 -0800
+Processing by UsersController#destroy as */*
+  Parameters: {"user"=>{"username"=>"Liz$"}, "id"=>"5"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:37
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:40
+  [1m[36mArtwork Load (1.0ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 5]]
+  ↳ app/controllers/users_controller.rb:40
+  [1m[36mArtworkShare Load (1.8ms)[0m  [1m[34mSELECT "artwork_shares".* FROM "artwork_shares" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 5]]
+  ↳ app/controllers/users_controller.rb:40
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  ↳ app/controllers/users_controller.rb:40
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:40
+Completed 200 OK in 75ms (Views: 0.4ms | ActiveRecord: 7.4ms)
+
+
+Started GET "/users/5" for 127.0.0.1 at 2018-11-12 17:05:28 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"5"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17
+Redirected to http://localhost:3000/users
+Completed 302 Found in 6ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-11-12 17:05:28 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4
+Completed 200 OK in 5ms (Views: 3.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/100" for 127.0.0.1 at 2018-11-12 17:05:39 -0800
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"100"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 100], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17
+Redirected to http://localhost:3000/users
+Completed 302 Found in 4ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-11-12 17:05:39 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/artworks/100" for 127.0.0.1 at 2018-11-12 17:05:53 -0800
+Processing by ArtworksController#show as */*
+  Parameters: {"id"=>"100"}
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 100], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:17
+Redirected to http://localhost:3000/artworks
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:05:54 -0800
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/artworks/1" for 127.0.0.1 at 2018-11-12 17:06:24 -0800
+Processing by ArtworksController#update as */*
+  Parameters: {"artwork"=>{"title"=>"Nude George Harrison"}, "id"=>"1"}
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:29
+  [1m[36mArtwork Exists (1.5ms)[0m  [1m[34mSELECT  1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."id" != $2 AND "artworks"."artist_id" = $3 LIMIT $4[0m  [["title", "Nude George Harrison"], ["id", 1], ["artist_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:29
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:29
+  [1m[36mArtwork Update (0.6ms)[0m  [1m[33mUPDATE "artworks" SET "title" = $1, "updated_at" = $2 WHERE "artworks"."id" = $3[0m  [["title", "Nude George Harrison"], ["updated_at", "2018-11-13 01:06:24.489320"], ["id", 1]]
+  ↳ app/controllers/artworks_controller.rb:29
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:29
+Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/artworks" for 127.0.0.1 at 2018-11-12 17:06:41 -0800
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Nude George Harrison"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."artist_id" IS NULL LIMIT $2[0m  [["title", "Nude George Harrison"], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/artworks_controller.rb:9
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/artworks" for 127.0.0.1 at 2018-11-12 17:06:53 -0800
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Nude George Harrison 2", "image_url"=>"whitehouse.gov", "artist_id"=>"2"}}
+  [1m[35m (2.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Exists (1.6ms)[0m  [1m[34mSELECT  1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."artist_id" = $2 LIMIT $3[0m  [["title", "Nude George Harrison 2"], ["artist_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Create (0.7ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Nude George Harrison 2"], ["image_url", "whitehouse.gov"], ["artist_id", 2], ["created_at", "2018-11-13 01:06:53.538321"], ["updated_at", "2018-11-13 01:06:53.538321"]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:9
+Completed 200 OK in 14ms (Views: 0.5ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:06:57 -0800
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (2.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:09:07 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/artwork_shares"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started POST "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:10:01 -0800
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"artwork_share"=>{"artist_id"=>"2", "viewer_id"=>"2"}}
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 2.4ms)
+
+
+
+ActiveModel::UnknownAttributeError - unknown attribute 'artist_id' for ArtworkShare.:
+  app/controllers/artwork_shares_controller.rb:3:in `create'
+
+Started POST "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:10:17 -0800
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"1", "viewer_id"=>"2"}}
+Unpermitted parameter: :artwork_id
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtworkShare Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" IS NULL AND "artwork_shares"."viewer_id" = $1 LIMIT $2[0m  [["viewer_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+Completed 422 Unprocessable Entity in 11ms (Views: 0.2ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:10:35 -0800
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"2", "viewer_id"=>"2"}}
+Unpermitted parameter: :artwork_id
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtworkShare Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" IS NULL AND "artwork_shares"."viewer_id" = $1 LIMIT $2[0m  [["viewer_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.6ms)
+
+
+  [1m[36mArtworkShare Load (1.0ms)[0m  [1m[34mSELECT "artwork_shares".* FROM "artwork_shares"[0m
+  [1m[36mArtwork Load (1.1ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:11:27 -0800
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"2", "viewer_id"=>"2"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtworkShare Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" = $1 AND "artwork_shares"."viewer_id" = $2 LIMIT $3[0m  [["artwork_id", 2], ["viewer_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+Completed 422 Unprocessable Entity in 107ms (Views: 0.2ms | ActiveRecord: 21.2ms)
+
+
+Started POST "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:11:40 -0800
+Processing by ArtworkSharesController#create as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"3", "viewer_id"=>"2"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtworkShare Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "artwork_shares" WHERE "artwork_shares"."artwork_id" = $1 AND "artwork_shares"."viewer_id" = $2 LIMIT $3[0m  [["artwork_id", 3], ["viewer_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT  "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[36mArtworkShare Create (43.1ms)[0m  [1m[32mINSERT INTO "artwork_shares" ("artwork_id", "viewer_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["artwork_id", 3], ["viewer_id", 2], ["created_at", "2018-11-13 01:11:40.264262"], ["updated_at", "2018-11-13 01:11:40.264262"]]
+  ↳ app/controllers/artwork_shares_controller.rb:5
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artwork_shares_controller.rb:5
+Completed 200 OK in 61ms (Views: 0.6ms | ActiveRecord: 46.1ms)
+
+
+Started DELETE "/artwork_shares" for 127.0.0.1 at 2018-11-12 17:12:08 -0800
+  
+ActionController::RoutingError (No route matches [DELETE] "/artwork_shares"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started DELETE "/artwork_shares/3" for 127.0.0.1 at 2018-11-12 17:12:24 -0800
+Processing by ArtworkSharesController#destroy as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"3", "viewer_id"=>"2"}, "id"=>"3"}
+  [1m[36mArtworkShare Load (0.6ms)[0m  [1m[34mSELECT  "artwork_shares".* FROM "artwork_shares" WHERE "artwork_shares"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artwork_shares_controller.rb:16
+  [1m[36mArtworkShare Destroy (0.5ms)[0m  [1m[31mDELETE FROM "artwork_shares" WHERE "artwork_shares"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/artwork_shares_controller.rb:16
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artwork_shares_controller.rb:16
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 1.9ms)
+
+
+Started DELETE "/artwork_shares/3" for 127.0.0.1 at 2018-11-12 17:12:26 -0800
+Processing by ArtworkSharesController#destroy as */*
+  Parameters: {"artwork_share"=>{"artwork_id"=>"3", "viewer_id"=>"2"}, "id"=>"3"}
+  [1m[36mArtworkShare Load (0.5ms)[0m  [1m[34mSELECT  "artwork_shares".* FROM "artwork_shares" WHERE "artwork_shares"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artwork_shares_controller.rb:13
+  Rendering text template
+  Rendered text template (0.0ms)
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1/artworks" for 127.0.0.1 at 2018-11-12 17:19:57 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mArtwork Load (1.3ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 82ms (Views: 12.8ms | ActiveRecord: 13.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-11-12 17:20:13 -0800
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4
+Completed 200 OK in 29ms (Views: 6.4ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:20:17 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/artworks"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:20:49 -0800
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 63ms (Views: 17.4ms | ActiveRecord: 9.6ms)
+
+
+Started POST "/artworks" for 127.0.0.1 at 2018-11-12 17:21:50 -0800
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Nude John Lennon", "image_url"=>"http://nudejohnlennon.com", "artist_id"=>"3"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."artist_id" = $2 LIMIT $3[0m  [["title", "Nude John Lennon"], ["artist_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Create (10.0ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Nude John Lennon"], ["image_url", "http://nudejohnlennon.com"], ["artist_id", 3], ["created_at", "2018-11-13 01:21:50.613300"], ["updated_at", "2018-11-13 01:21:50.613300"]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:9
+Completed 200 OK in 91ms (Views: 0.6ms | ActiveRecord: 18.3ms)
+
+
+Started POST "/artworks" for 127.0.0.1 at 2018-11-12 17:22:11 -0800
+Processing by ArtworksController#create as */*
+  Parameters: {"artwork"=>{"title"=>"Nude Ringo Starr", "image_url"=>"http://ringostarr.com", "artist_id"=>"3"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "artworks" WHERE "artworks"."title" = $1 AND "artworks"."artist_id" = $2 LIMIT $3[0m  [["title", "Nude Ringo Starr"], ["artist_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[36mArtwork Create (1.8ms)[0m  [1m[32mINSERT INTO "artworks" ("title", "image_url", "artist_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Nude Ringo Starr"], ["image_url", "http://ringostarr.com"], ["artist_id", 3], ["created_at", "2018-11-13 01:22:11.465248"], ["updated_at", "2018-11-13 01:22:11.465248"]]
+  ↳ app/controllers/artworks_controller.rb:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/artworks_controller.rb:9
+Completed 200 OK in 13ms (Views: 0.4ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/artworks" for 127.0.0.1 at 2018-11-12 17:22:15 -0800
+Processing by ArtworksController#index as */*
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1/artworks" for 127.0.0.1 at 2018-11-12 17:22:33 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:4
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1/artworks" for 127.0.0.1 at 2018-11-12 17:24:23 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+No template found for ArtworksController#index, rendering head :no_content
+Completed 204 No Content in 30647ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1/artworks" for 127.0.0.1 at 2018-11-12 17:28:44 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:6
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 1]]
+  ↳ app/controllers/artworks_controller.rb:8
+Completed 500 Internal Server Error in 126ms (Views: 22.8ms | ActiveRecord: 19.3ms)
+
+
+
+AbstractController::DoubleRenderError - Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".:
+  app/controllers/artworks_controller.rb:9:in `index'
+
+Started GET "/users/1/artworks" for 127.0.0.1 at 2018-11-12 17:29:10 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:6
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 1]]
+  ↳ app/controllers/artworks_controller.rb:8
+  [1m[36mArtwork Load (1.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 1]]
+  ↳ app/controllers/artworks_controller.rb:8
+Completed 200 OK in 236ms (Views: 0.8ms | ActiveRecord: 19.4ms)
+
+
+Started GET "/users/2/artworks" for 127.0.0.1 at 2018-11-12 17:29:17 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:6
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 2]]
+  ↳ app/controllers/artworks_controller.rb:8
+  [1m[36mArtwork Load (2.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 2]]
+  ↳ app/controllers/artworks_controller.rb:8
+Completed 200 OK in 12ms (Views: 2.1ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/users/3/artworks" for 127.0.0.1 at 2018-11-12 17:29:23 -0800
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:6
+  [1m[36mArtwork Load (0.7ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."artist_id" = $1[0m  [["artist_id", 3]]
+  ↳ app/controllers/artworks_controller.rb:8
+  [1m[36mArtwork Load (0.9ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" INNER JOIN "artwork_shares" ON "artworks"."id" = "artwork_shares"."artwork_id" WHERE "artwork_shares"."viewer_id" = $1[0m  [["viewer_id", 3]]
+  ↳ app/controllers/artworks_controller.rb:8
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 2.0ms)
+
+
